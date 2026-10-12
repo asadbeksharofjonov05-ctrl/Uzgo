@@ -5,25 +5,67 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>UZGO</title>
 <style>
-body{font-family:Arial,sans-serif;background:#f2f5f9;margin:0;text-align:center;color:#172033}
-header{background:#087f5b;color:white;padding:25px}
-h1{font-size:42px;margin:0}
-main{padding:20px}
-.card{background:white;margin:12px auto;padding:20px;border-radius:15px;max-width:350px;box-shadow:0 2px 8px #ddd}
-button{background:#087f5b;color:white;border:0;padding:12px 24px;border-radius:9px;font-size:16px}
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial;background:#f3f7f4;color:#222}
+header{background:#079447;color:white;padding:22px;border-radius:0 0 22px 22px}
+header h1{margin:0;font-size:30px}
+header p{margin-bottom:0}
+main{padding:18px}
+h2{font-size:21px}
+.services{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+button{cursor:pointer}
+.service{border:0;background:white;padding:18px 5px;border-radius:15px;font-size:15px;box-shadow:0 2px 8px #ddd}
+.service span{display:block;font-size:27px;margin-bottom:8px}
+.card{background:white;padding:18px;border-radius:16px;margin-top:20px}
+input{width:100%;padding:14px;border:1px solid #ddd;border-radius:10px;margin:6px 0;font-size:16px}
+.go{background:#079447;color:white;border:0;padding:15px;width:100%;border-radius:12px;font-size:17px;margin-top:10px}
+#result{font-weight:bold;margin-top:15px}
+footer{position:fixed;bottom:0;background:white;width:100%;display:flex;justify-content:space-around;padding:15px;border-top:1px solid #ddd}
+footer button{background:none;border:0;font-size:14px}
+main{padding-bottom:90px}
 </style>
 </head>
 <body>
 <header>
-<h1>UZGO</h1>
-<p>Barcha xizmatlar bitta platformada</p>
+<h1>🟢 UZGO</h1>
+<p>Manzilingizga oson va tez yeting!</p>
 </header>
 <main>
 <h2>Xizmatni tanlang</h2>
-<div class="card"><h3>🚕 Taksi</h3><p>Manzilingizga borish uchun</p><button onclick="alert('Taksi xizmati tez orada ishga tushadi!')">Tanlash</button></div>
-<div class="card"><h3>📦 Yetkazib berish</h3><p>Buyum va mahsulotlarni yetkazish</p><button onclick="alert('Yetkazib berish tez orada ishga tushadi!')">Tanlash</button></div>
-<div class="card"><h3>🚚 Yuk tashish</h3><p>Yuklaringizni tashish xizmati</p><button onclick="alert('Yuk tashish xizmati tez orada ishga tushadi!')">Tanlash</button></div>
+<div class="services">
+<button class="service" onclick="choose('Taksi')"><span>🚕</span>Taksi</button>
+<button class="service" onclick="choose('Yetkazib berish')"><span>📦</span>Yetkazish</button>
+<button class="service" onclick="choose('Yuk tashish')"><span>🚚</span>Yuk tashish</button>
+</div>
+<div class="card">
+<h2 id="title">🚕 Taksi buyurtma qilish</h2>
+<label>Qayerdan borasiz?</label>
+<input id="from" placeholder="Boshlang‘ich manzil">
+<label>Qayerga borasiz?</label>
+<input id="to" placeholder="Boradigan manzil">
+<button class="go" onclick="order()">Buyurtma berish</button>
+<div id="result"></div>
+</div>
 </main>
-</body>
-</html>
+<footer>
+<button onclick="window.scrollTo(0,0)">🏠 Bosh sahifa</button>
+<button onclick="alert('Buyurtmalaringiz shu yerda ko‘rsatiladi.')">📋 Buyurtmalar</button>
+<button onclick="alert('UZGO foydalanuvchi profili')">👤 Profil</button>
+</footer>
+<script>
+let service="Taksi";
+function choose(s){
+service=s;
+document.getElementById("title").innerText="📍 "+s+" buyurtma qilish";
+document.getElementById("result").innerText="";
+}
+function order(){
+let a=document.getElementById("from").value.trim();
+let b=document.getElementById("to").value.trim();
+if(!a||!b){
+document.getElementById("result").innerText="Iltimos, ikkala manzilni ham kiriting.";
+return;
+}
+document.getElementById("result").innerText=
+service+" tanlandi! "+a+" → "+b+". Hozircha bu sinov versiyasi: buyurtma hay
 
